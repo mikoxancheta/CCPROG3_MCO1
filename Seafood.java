@@ -1,9 +1,10 @@
 public class Seafood extends Product{
     public Seafood(
+        String productType,
         String productName,
         String serialNumber,
         double price
     ) {
-        super(productName, serialNumber, price, null);
+        super("Seafood", productName, serialNumber, price);
     }
 }
