@@ -1,20 +1,24 @@
 //Super class
 public class Product{
+    String productType;
     String productName;
     String serialNumber;
     double price;
-    String productType;
 
     public Product(
+        String productType,
         String productName,
         String serialNumber,
-        double price,
-        String productType
+        double price
     ) {
+        this.productType = productType;
         this.productName = productName;
         this.serialNumber = serialNumber;
         this.price = price;
-        this.productType = productType;
+    }
+
+    public String getProductType() {
+        return this.productType;
     }
 
     public String getProductName() {
@@ -28,8 +32,8 @@ public class Product{
     public double getPrice() {
         return this.price;
     }
-
-    public String getProductType() {
-        return this.productType;
-    }
 }
+
+
+
+
