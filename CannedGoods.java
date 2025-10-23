@@ -1,9 +1,10 @@
 public class CannedGoods extends Product{
     public CannedGoods(
+        String productType,
         String productName,
         String serialNumber,
         double price
     ) {
-        super(productName, serialNumber, price, null);
+        super("Canned Goods", productName, serialNumber, price);
     }
 }
