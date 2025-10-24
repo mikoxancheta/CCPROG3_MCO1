@@ -43,8 +43,25 @@ public class Service extends Amenity {
     }
 
     @Override
-public void interact(Shopper shopper) {
-    System.out.println("Interacting with the service: " + this.getClass().getSimpleName());
-    // You can customize behavior per service type
+    public void interact(Shopper shopper) {
+        System.out.println("Welcome to the service: " + this.getClass().getSimpleName());
+
+        // Example logic for CheckoutCounter
+        if (shopper.getCart().isEmpty()) {
+            System.out.println("Your cart is empty. Add some products before checking out!");
+            return;
+        }
+
+        double total = 0;
+        System.out.println("\n--- Receipt ---");
+        for (Product p : shopper.getCart()) {
+            System.out.println(p.getProductName() + " (" + p.getSerialNumber() + "): ₱" + p.getPrice());
+            total += p.getPrice();
+        }
+        System.out.println("Total: ₱" + total);
+        System.out.println("Thank you for shopping! Your cart is now empty.\n");
+
+        // Clear shopper's cart
+        shopper.getCart().clear();
     }
 }
