@@ -1,12 +1,10 @@
-import java.util.Scanner;
-
 /**
  * CCPROG3 MCO1 - Supermarket Simulator
- * 
- * The Supermarket class represents the main supermarket environment containing
+ *
+ * The Supermarket class represents the supermarket environment containing
  * one or more floors and a shopper. For MCO1, only a single floor is required.
- * This class manages the overall flow of the simulation, including starting
- * the program and handling shopper movement and interactions.
+ * This class provides core functionality for managing supermarket data and
+ * delegating actions to the shopper.
  */
 public class Supermarket {
 
@@ -20,85 +18,24 @@ public class Supermarket {
      * Constructs a Supermarket with one floor for MCO1.
      */
     public Supermarket() {
-        // For MCO1, the supermarket starts with a single floor
         floors = new Floor[1];
-        floors[0] = new Floor();  // Initialize the first floor
-        shopper = null;           // Shopper will be initialized later
+        floors[0] = new Floor();
+        shopper = null;
     }
 
     /**
-     * Starts the supermarket simulation. Creates a shopper and handles
-     * console-based navigation (WASD for movement, IJKL for facing direction,
-     * and Space for interactions).
+     * Initializes a new shopper inside the supermarket.
+     *
+     * @param name The shopper's name.
+     * @param age  The shopper's age.
      */
-    public void startSimulation() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("=== Welcome to the Supermarket Simulator ===");
-
-        // Initialize shopper
-        System.out.print("Enter shopper's name: ");
-        String name = scanner.nextLine();
-
-        System.out.print("Enter shopper's age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
+    public void addShopper(String name, int age) {
         shopper = new Shopper(name, age, new Position(0, 0));
-
-        System.out.println("\nHello, " + shopper.getName() + "! You can now explore the supermarket.");
-        System.out.println("Use W/A/S/D to move, I/J/K/L to change direction, and SPACE to interact.");
-        System.out.println("Type 'Q' anytime to quit.\n");
-
-        String command;
-        do {
-            System.out.print("Enter command: ");
-            command = scanner.nextLine().trim().toUpperCase();
-
-            switch (command) {
-                case "W":
-                    shopper.move("up");
-                    break;
-                case "S":
-                    shopper.move("down");
-                    break;
-                case "A":
-                    shopper.move("left");
-                    break;
-                case "D":
-                    shopper.move("right");
-                    break;
-                case "I":
-                    shopper.face("up");
-                    break;
-                case "K":
-                    shopper.face("down");
-                    break;
-                case "J":
-                    shopper.face("left");
-                    break;
-                case "L":
-                    shopper.face("right");
-                    break;
-                case " ":
-                    // For MCO1, interaction is limited and may be simulated
-                    System.out.println(shopper.getName() + " interacts with the nearby amenity (if any).");
-                    break;
-                case "Q":
-                    System.out.println("\nExiting the supermarket. Thank you for visiting!");
-                    break;
-                default:
-                    System.out.println("Invalid input! Use W/A/S/D for movement, I/J/K/L for direction, SPACE to interact, Q to quit.");
-                    break;
-            }
-
-        } while (!command.equals("Q"));
-
-        scanner.close();
+        System.out.println("Shopper " + name + " has entered the supermarket.");
     }
 
     /**
-     * Moves the shopper in the specified direction. This method may be called
-     * by other classes or methods to simulate shopper navigation.
+     * Moves the shopper in the specified direction.
      *
      * @param direction The direction to move ("up", "down", "left", or "right").
      */
@@ -106,15 +43,36 @@ public class Supermarket {
         if (shopper != null) {
             shopper.move(direction);
         } else {
-            System.out.println("No shopper in the supermarket.");
+            System.out.println("No shopper found inside the supermarket.");
         }
+    }
+
+    /**
+     * Allows the shopper to interact with an amenity.
+     * (For MCO1, this can be simulated or left minimal.)
+     */
+    public void interact() {
+        if (shopper != null) {
+            System.out.println(shopper.getName() + " interacts with the nearby amenity (if any).");
+        } else {
+            System.out.println("No shopper to interact with amenities.");
+        }
+    }
+
+    /**
+     * Returns the shopper object.
+     *
+     * @return The current shopper.
+     */
+    public Shopper getShopper() {
+        return shopper;
     }
 
     /**
      * Retrieves a specific floor in the supermarket by index.
      *
-     * @param index The index of the floor to retrieve.
-     * @return The Floor object at the specified index.
+     * @param index The index of the floor.
+     * @return The Floor object if index is valid, otherwise null.
      */
     public Floor getFloor(int index) {
         if (index >= 0 && index < floors.length) {
