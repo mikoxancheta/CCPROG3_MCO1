@@ -42,4 +42,10 @@ public class Service extends Amenity {
     public void performService(Shopper shopper) {
         // Implementation will depend on subclass type
     }
+
+    @Override
+public void interact(Shopper shopper) {
+    System.out.println("Interacting with the service: " + this.getClass().getSimpleName());
+    // You can customize behavior per service type
+    }
 }
