@@ -1,4 +1,4 @@
-// Represents any product display inside the supermarket (i.e., Table, ChilledCounter, Refrigerator, and Shelf).
+// Represents any product display inside the supermarket (i.e., Table, ChilledCounter, Refrigerator, and Shelf). 
 import java.util.ArrayList;
 
 public class Display extends Amenity {
