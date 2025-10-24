@@ -12,7 +12,7 @@ public class Floor {
 
     /**
      * Constructs a Floor with fixed size 22x22.
-     * Initializes all cells with a default Amenity at each position.
+     * Initializes all cells with a default walkable Amenity at each position.
      * The outer edges of the floor are considered walls and are not passable.
      */
     public Floor() {
@@ -20,7 +20,14 @@ public class Floor {
 
         for (int x = 0; x < 22; x++) {
             for (int y = 0; y < 22; y++) {
-                map[x][y] = new Amenity(new Position(x, y));
+                // Use an anonymous subclass of Amenity since Amenity is abstract
+                map[x][y] = new Amenity(new Position(x, y)) {
+                    @Override
+                    public void interact(Shopper shopper) {
+                        // Nothing to interact with for empty floor tiles
+                        System.out.println("Nothing here to interact with.");
+                    }
+                };
             }
         }
     }
