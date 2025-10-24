@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 public class Display extends Amenity {
 
+    private Address address;
+    private int capacity;
     /** List of products currently on the display */
     private ArrayList<Product> products;
 
@@ -26,6 +28,8 @@ public class Display extends Amenity {
      */
     public Display(Position position, Address address, int capacity, String allowedProductType) {
         super(position);
+        this.address = address;
+        this.capacity = capacity;
         this.products = new ArrayList<>(capacity);
         this.allowedProductType = allowedProductType;
     }
