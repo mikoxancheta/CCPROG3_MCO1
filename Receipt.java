@@ -125,24 +125,27 @@ private boolean isBeverage(String type) {
      * @return The complete receipt as a String.
      */
     public String generateReceiptText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("=== SUPERMARKET RECEIPT ===\n");
-        sb.append("Shopper: ").append(shopper.getName()).append("\n");
-        sb.append("Age: ").append(shopper.getAge()).append("\n\n");
+    StringBuilder sb = new StringBuilder();
+    sb.append("=== SUPERMARKET RECEIPT ===\n");
+    sb.append("Shopper: ").append(shopper.getName()).append("\n");
+    sb.append("Age: ").append(shopper.getAge()).append("\n\n");
 
-        sb.append("Items Purchased:\n");
-        for (Product p : products) {
-            sb.append(String.format(" - %-20s ₱%.2f%n", p.getProductName(), p.getPrice()));
-        }
+    sb.append("Items Purchased:\n");
+    sb.append(String.format("%-10s %-20s %10s%n", "Serial", "Product Name", "Price"));
+    sb.append("--------------------------------------------------\n");
 
-        sb.append("\nSubtotal: ₱").append(String.format("%.2f", subtotal)).append("\n");
-        sb.append("Discount: ₱").append(String.format("%.2f", discount)).append("\n");
-        sb.append("-----------------------------\n");
-        sb.append("Total: ₱").append(String.format("%.2f", total)).append("\n");
-        sb.append("=============================\n");
-
-        return sb.toString();
+    for (Product p : products) {
+        sb.append(String.format("%-10s %-20s ₱%.2f%n", p.getSerialNumber(), p.getProductName(), p.getPrice()));
     }
+
+    sb.append("--------------------------------------------------\n");
+    sb.append(String.format("Subtotal: ₱%.2f%n", subtotal));
+    sb.append(String.format("Discount: ₱%.2f%n", discount));
+    sb.append(String.format("Total: ₱%.2f%n", total));
+    sb.append("==================================================\n");
+
+    return sb.toString();
+}
 
     /**
      * Saves the generated receipt details into a text file.
