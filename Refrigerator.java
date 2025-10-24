@@ -14,6 +14,11 @@ public class Refrigerator extends Display {
      * @param capacity the maximum number of products that can be displayed
      */
     public Refrigerator(Position position, Address address, int capacity) {
-        super(position, address, capacity);
+        super(position, address, capacity, "Refrigerator");
+    }
+
+    @Override
+    public void interact(Shopper shopper) {
+        // Interaction logic
     }
 }
