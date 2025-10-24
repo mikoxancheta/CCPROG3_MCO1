@@ -94,10 +94,33 @@ public class Display extends Amenity {
     public int getCapacity() {
         return capacity;
     }
-
+    
     @Override
     public void interact(Shopper shopper) {
-        System.out.println("Interacting with display: " + allowedProductType);
-        // Logic for shopper picking products can go here
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("You are at the " + allowedProductType + " display.");
+
+        if (products.isEmpty()) {
+            System.out.println("Sorry, this display is empty!");
+            return;
+        }
+
+        System.out.println("Products available:");
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            System.out.println((i + 1) + ". " + p.getProductName() + " (" + p.getSerialNumber() + ") - ₱" + p.getPrice());
+        }
+
+        System.out.print("Enter the number of the product you want to pick (0 to cancel): ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice > 0 && choice <= products.size()) {
+            Product picked = products.get(choice - 1);
+            shopper.addToCart(picked);
+            System.out.println("Added " + picked.getProductName() + " to your cart!");
+        } else {
+            System.out.println("No product picked.");
+        }
     }
 }
