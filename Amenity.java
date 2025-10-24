@@ -19,17 +19,13 @@ public abstract class Amenity {
         this.position = position;
     }
 
-    public abstract void interact(Shopper shopper);
-
-    public Position getPosition() {
-        return position;
-    }
-
     /**
      * Returns the position of this amenity.
      *
      * @return the position of the amenity
      */
+    public abstract void interact(Shopper shopper);
+    
     public Position getPosition() {
         return position;
     }
