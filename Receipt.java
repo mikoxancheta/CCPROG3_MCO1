@@ -57,20 +57,57 @@ public class Receipt {
     }
 
     /**
-     * Calculates any applicable discount based on certain conditions.
-     * For MCO1, this can be a placeholder rule:
-     * Example: If subtotal > 500, apply a 5% discount.
-     *
-     * @return The computed discount value.
-     */
-    public double calculateDiscount() {
-        if (subtotal > 500) {
-            discount = subtotal * 0.05; // 5% discount
-        } else {
-            discount = 0.0;
+ * Calculates any applicable discount based on the shopper's age
+ * and product types. 
+ *
+ * Shoppers aged 60 and above get:
+ * - 20% discount on food
+ * - 10% discount on beverages
+ * Alcohol products are excluded from discounts.
+ *
+ * @return The computed discount value.
+ */
+public double calculateDiscount() {
+    discount = 0.0;
+
+    if (shopper != null && shopper.getAge() >= 60) {
+        for (Product p : products) {
+            String type = p.getProductType().toLowerCase();
+
+            if (type.equals("alcohol")) {
+                continue; // No discount on alcohol
+            } else if (isFood(type)) {
+                discount += p.getPrice() * 0.20; // 20% off food
+            } else if (isBeverage(type)) {
+                discount += p.getPrice() * 0.10; // 10% off drinks
+            }
         }
-        return discount;
     }
+
+    return discount;
+}
+
+/**
+ * Helper method to identify if a product type is a food.
+ *
+ * @param type The product type.
+ * @return True if the product is a food type.
+ */
+private boolean isFood(String type) {
+    return type.equals("fruit") || type.equals("chicken") || type.equals("beef") ||
+           type.equals("seafood") || type.equals("snacks") || type.equals("cereal") ||
+           type.equals("noodles") || type.equals("canned goods") || type.equals("condiments");
+}
+
+/**
+ * Helper method to identify if a product type is a beverage.
+ *
+ * @param type The product type.
+ * @return True if the product is a drink type.
+ */
+private boolean isBeverage(String type) {
+    return type.equals("softdrink") || type.equals("juice");
+}
 
     /**
      * Calculates the final total after discount.
