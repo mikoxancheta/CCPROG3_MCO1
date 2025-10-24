@@ -172,18 +172,18 @@ public class Driver {
             new Product("Alcohol", "Vodka", "ALC00003", 400.00)
         };
 
-        Display fruitDisplay       = new Display(new Position(1, 1), new Address("1", "A", 1), 10, "Fruit");
-        Display chickenDisplay     = new Display(new Position(2, 1), new Address("1", "A", 2), 10, "Chicken");
-        Display beefDisplay        = new Display(new Position(3, 1), new Address("1", "A", 3), 10, "Beef");
-        Display seafoodDisplay     = new Display(new Position(4, 1), new Address("1", "A", 4), 10, "Seafood");
-        Display cerealDisplay      = new Display(new Position(5, 1), new Address("1", "B", 1), 10, "Cereal");
-        Display noodlesDisplay     = new Display(new Position(6, 1), new Address("1", "B", 2), 10, "Noodles");
-        Display snacksDisplay      = new Display(new Position(7, 1), new Address("1", "B", 3), 10, "Snacks");
+        Display fruitDisplay = new Display(new Position(1, 1), new Address("1", "A", 1), 10, "Fruit");
+        Display chickenDisplay = new Display(new Position(2, 1), new Address("1", "A", 2), 10, "Chicken");
+        Display beefDisplay = new Display(new Position(3, 1), new Address("1", "A", 3), 10, "Beef");
+        Display seafoodDisplay = new Display(new Position(4, 1), new Address("1", "A", 4), 10, "Seafood");
+        Display cerealDisplay = new Display(new Position(5, 1), new Address("1", "B", 1), 10, "Cereal");
+        Display noodlesDisplay = new Display(new Position(6, 1), new Address("1", "B", 2), 10, "Noodles");
+        Display snacksDisplay = new Display(new Position(7, 1), new Address("1", "B", 3), 10, "Snacks");
         Display cannedGoodsDisplay = new Display(new Position(8, 1), new Address("1", "B", 4), 10, "CannedGoods");
-        Display condimentsDisplay  = new Display(new Position(9, 1), new Address("1", "C", 1), 10, "Condiments");
-        Display softdrinkDisplay   = new Display(new Position(10, 1), new Address("1", "C", 2), 10, "Softdrink");
-        Display juiceDisplay       = new Display(new Position(11, 1), new Address("1", "C", 3), 10, "Juice");
-        Display alcoholDisplay     = new Display(new Position(12, 1), new Address("1", "C", 4), 10, "Alcohol");
+        Display condimentsDisplay = new Display(new Position(9, 1), new Address("1", "C", 1), 10, "Condiments");
+        Display softdrinkDisplay = new Display(new Position(10, 1), new Address("1", "C", 2), 10, "Softdrink");
+        Display juiceDisplay = new Display(new Position(11, 1), new Address("1", "C", 3), 10, "Juice");
+        Display alcoholDisplay = new Display(new Position(12, 1), new Address("1", "C", 4), 10, "Alcohol");
         
         assignProductsRandomly(fruitDisplay, fruits);
         assignProductsRandomly(chickenDisplay, chicken);
