@@ -5,6 +5,8 @@
  * checkout counters, basket/cart stations, entrances, exits, and product search.
  */
 public abstract class Service extends Amenity {
+    public Service(Position position, Address address, int capacity, String name) {
+        super(position);
 
     /** Position of the service on the floor */
     protected Position position;
@@ -17,6 +19,7 @@ public abstract class Service extends Amenity {
 
     /** Optional capacity (e.g., number of baskets/carts, or max checkout lines) */
     protected int capacity;
+    }
 
     /**
      * Constructor for services with position and name (for stations like Basket/Cart/Entrance/Exit)
