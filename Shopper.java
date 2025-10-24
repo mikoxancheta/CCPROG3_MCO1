@@ -165,6 +165,15 @@ public void pickupProduct(Product product) {
         return carriedProducts;
     }
 
+    /**
+ * Adds a product to the shopper's hand-carried items or equipment.
+ *
+ * @param product Product to add
+ */
+    public void addToCart(Product product) {
+        pickupProduct(product);
+    }
+
     /** @return The shopper's name. */
     public String getName() {
         return name;
