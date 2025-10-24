@@ -73,7 +73,7 @@ public class CheckoutCounter extends Service {
      * @param shopper The shopper interacting with the counter.
      */
     @Override
-    public void interact(Shopper shopper) {
+    public void performService(Shopper shopper) {
         checkOutShopper(shopper);
     }
 }
