@@ -18,9 +18,8 @@ public class Service extends Amenity {
      * @param position the position of the service on the floor
      * @param type the kind of service represented
      */
-    public Service(Position position, String type) {
+    public Service(Position position) {
         super(position);
-        this.type = type;
     }
 
     /**
