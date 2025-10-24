@@ -10,12 +10,6 @@ import java.util.ArrayList;
  */
 public class Display extends Amenity {
 
-    /** The address or section identifier of this display */
-    private Address address;
-
-    /** Maximum number of products the display can hold */
-    private int capacity;
-
     /** List of products currently on the display */
     private ArrayList<Product> products;
 
@@ -32,10 +26,8 @@ public class Display extends Amenity {
      */
     public Display(Position position, Address address, int capacity, String allowedProductType) {
         super(position);
-        this.address = address;
-        this.capacity = capacity;
+        this.products = new ArrayList<>(capacity);
         this.allowedProductType = allowedProductType;
-        this.products = new ArrayList<>();
     }
 
     /**
@@ -44,10 +36,8 @@ public class Display extends Amenity {
      * @param product The product to add
      */
     public void addProduct(Product product) {
-        if (product.getProductType().equalsIgnoreCase(allowedProductType) && products.size() < capacity) {
+        if (product.getProductType().equalsIgnoreCase(allowedProductType)) {
             products.add(product);
-        } else {
-            System.out.println("Cannot add product. Type mismatch or capacity full.");
         }
     }
 
@@ -103,5 +93,11 @@ public class Display extends Amenity {
      */
     public int getCapacity() {
         return capacity;
+    }
+
+    @Override
+    public void interact(Shopper shopper) {
+        System.out.println("Interacting with display: " + allowedProductType);
+        // Logic for shopper picking products can go here
     }
 }
