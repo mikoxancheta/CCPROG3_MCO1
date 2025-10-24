@@ -19,8 +19,8 @@ public class CheckoutCounter extends Service {
      *
      * @param position The position of the checkout counter in the supermarket.
      */
-    public CheckoutCounter(Position position) {
-        super("Checkout Counter", position);
+    public CheckoutCounter(Position position, Address address, int capacity) {
+        super(position, address, capacity, "CheckoutCounter");
     }
 
     /**
