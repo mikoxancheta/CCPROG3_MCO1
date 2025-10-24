@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * CCPROG3 MCO1 - Supermarket Simulator
