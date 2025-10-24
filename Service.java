@@ -1,45 +1,37 @@
 /**
  * CCPROG3 MCO1 - Supermarket Simulator
  *
- * Abstract base class for all services in the supermarket, including
- * checkout counters, basket/cart stations, entrances, exits, and product search.
+ * The Service class represents a service station or counter in the supermarket.
+ * This is an abstract class because specific services (e.g., CheckoutCounter) must
+ * implement the performService method.
  */
 public abstract class Service extends Amenity {
-    public Service(Position position, Address address, int capacity, String name) {
-        super(position);
 
-    /** Position of the service on the floor */
     protected Position position;
-
-    /** Name of the service */
+    protected Address address;
+    protected int capacity;
     protected String name;
 
-    /** Optional address of the service */
-    protected Address address;
-
-    /** Optional capacity (e.g., number of baskets/carts, or max checkout lines) */
-    protected int capacity;
-    }
-
     /**
-     * Constructor for services with position and name (for stations like Basket/Cart/Entrance/Exit)
+     * Constructs a Service with a position and name.
      *
-     * @param position Position of the service on the floor
-     * @param name     Name of the service
+     * @param position The position of the service in the supermarket.
+     * @param name     The name of the service.
      */
     public Service(Position position, String name) {
-        super(position);
+        super(position); // call parent constructor
         this.position = position;
         this.name = name;
+        this.capacity = 0; // default
+        this.address = null; // default
     }
 
     /**
-     * Constructor for services with position, address, capacity, and name
-     * (used for CheckoutCounter).
+     * Constructs a Service with full details.
      *
-     * @param position Position of the service
-     * @param address  Address/location info of the service
-     * @param capacity Maximum number of items or users the service can handle
+     * @param position The position of the service
+     * @param address  The address or label of the service
+     * @param capacity Maximum number of shoppers that can use it
      * @param name     Name of the service
      */
     public Service(Position position, Address address, int capacity, String name) {
@@ -51,33 +43,38 @@ public abstract class Service extends Amenity {
     }
 
     /**
-     * Abstract method for performing the service for a shopper.
+     * Abstract method for performing the service.
+     * Must be implemented by subclasses.
      *
      * @param shopper The shopper using the service
      */
     public abstract void performService(Shopper shopper);
 
     /**
-     * Default interaction triggers the service.
+     * Optional default interaction for all services.
+     * Subclasses can override this.
      *
-     * @param shopper The shopper interacting with this service
+     * @param shopper The shopper interacting with the service
      */
+    @Override
     public void interact(Shopper shopper) {
         performService(shopper);
     }
 
-    /** @return The name of the service */
-    public String getName() {
-        return name;
+    // Getters
+    public Position getPosition() {
+        return position;
     }
 
-    /** @return The address of the service */
     public Address getAddress() {
         return address;
     }
 
-    /** @return The capacity of the service */
     public int getCapacity() {
         return capacity;
+    }
+
+    public String getName() {
+        return name;
     }
 }
