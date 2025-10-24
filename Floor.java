@@ -10,40 +10,33 @@ public class Floor {
     /** 2D map representing the floor layout with amenities */
     private Amenity[][] map;
 
-    /**
-     * Constructs a Floor with fixed size 22x22.
-     * Initializes all cells with a default walkable Amenity and then assigns
-     * specific amenities according to the floor plan.
-     */
+    /** Dummy address and capacity for amenities that require them */
+    private Address floor1 = new Address("Floor 1");
+    private int defaultCapacity = 10;
+
     public Floor() {
         map = new Amenity[22][22];
 
-        // Initialize all empty tiles
+        // 1️⃣ Initialize all empty tiles
         for (int x = 0; x < 22; x++) {
             for (int y = 0; y < 22; y++) {
                 map[x][y] = new Amenity(new Position(x, y)) {
                     @Override
                     public void interact(Shopper shopper) {
+                        // Nothing to interact with
                         System.out.println("Nothing here to interact with.");
                     }
                 };
             }
         }
 
-        // Assign all fixed amenities
-        initializeFloor();
-    }
-
-    /**
-     * Sets up all walls, displays, services, and other special amenities
-     * according to the predefined map layout.
-     */
-    private void initializeFloor() {
-        // Walls
+        // 2️⃣ Assign walls (outer edges and internal walls)
         for (int y = 0; y <= 21; y++) map[0][y] = new Wall(new Position(0, y));
         for (int y = 0; y <= 21; y++) map[21][y] = new Wall(new Position(21, y));
         for (int x = 0; x <= 21; x++) map[x][0] = new Wall(new Position(x, 0));
         for (int x = 0; x <= 21; x++) map[x][21] = new Wall(new Position(x, 21));
+
+        // Internal walls
         for (int y = 0; y <= 9; y++) map[21][y] = new Wall(new Position(21, y));
         for (int y = 12; y <= 21; y++) map[21][y] = new Wall(new Position(21, y));
         map[17][10] = new Wall(new Position(17, 10));
@@ -59,44 +52,40 @@ public class Floor {
         map[18][18] = new Wall(new Position(18, 18));
         map[18][20] = new Wall(new Position(18, 20));
 
-        // ChilledCounters
-        for (int y = 1; y <= 6; y++) map[1][y] = new ChilledCounter(new Position(1, y), "Chicken");
-        for (int y = 8; y <= 13; y++) map[1][y] = new ChilledCounter(new Position(1, y), "Beef");
-        for (int y = 15; y <= 20; y++) map[1][y] = new ChilledCounter(new Position(1, y), "Fish");
+        // 3️⃣ Assign ChilledCounters
+        for (int y = 1; y <= 6; y++) map[1][y] = new ChilledCounter(new Position(1, y), floor1, defaultCapacity);
+        for (int y = 8; y <= 13; y++) map[1][y] = new ChilledCounter(new Position(1, y), floor1, defaultCapacity);
+        for (int y = 15; y <= 20; y++) map[1][y] = new ChilledCounter(new Position(1, y), floor1, defaultCapacity);
 
-        // Shelves
+        // 4️⃣ Assign Shelves
         for (int x = 4; x <= 7; x++) {
-            for (int y = 2; y <= 3; y++) map[x][y] = new Shelf(new Position(x, y), "Alcohol");
-            for (int y = 6; y <= 7; y++) map[x][y] = new Shelf(new Position(x, y), "Softdrink");
-            for (int y = 14; y <= 15; y++) map[x][y] = new Shelf(new Position(x, y), "Cereal");
-            for (int y = 18; y <= 19; y++) map[x][y] = new Shelf(new Position(x, y), "CannedGoods");
+            for (int y = 2; y <= 3; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
+            for (int y = 6; y <= 7; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
+            for (int y = 14; y <= 15; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
+            for (int y = 18; y <= 19; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
         }
         for (int x = 10; x <= 13; x++) {
-            for (int y = 2; y <= 3; y++) map[x][y] = new Shelf(new Position(x, y), "Condiments");
-            for (int y = 6; y <= 7; y++) map[x][y] = new Shelf(new Position(x, y), "Milk");
-            for (int y = 14; y <= 15; y++) map[x][y] = new Shelf(new Position(x, y), "Noodles");
-            for (int y = 18; y <= 19; y++) map[x][y] = new Shelf(new Position(x, y), "Snacks");
+            for (int y = 2; y <= 3; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
+            for (int y = 6; y <= 7; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
+            for (int y = 14; y <= 15; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
+            for (int y = 18; y <= 19; y++) map[x][y] = new Shelf(new Position(x, y), floor1, defaultCapacity);
         }
 
-        // Tables
-        for (int x = 4; x <= 7; x++) for (int y = 10; y <= 11; y++) map[x][y] = new Table(new Position(x, y), "Fruits");
-        for (int x = 10; x <= 13; x++) for (int y = 10; y <= 11; y++) map[x][y] = new Table(new Position(x, y), "Fruits");
+        // 5️⃣ Assign Tables
+        for (int x = 4; x <= 7; x++) for (int y = 10; y <= 11; y++) map[x][y] = new Table(new Position(x, y), floor1, defaultCapacity);
+        for (int x = 10; x <= 13; x++) for (int y = 10; y <= 11; y++) map[x][y] = new Table(new Position(x, y), floor1, defaultCapacity);
 
-        // ProductSearch
-        map[15][8] = new ProductSearch(new Position(15, 8));
-        map[15][13] = new ProductSearch(new Position(15, 13));
+        // 6️⃣ Assign ProductSearch, BasketStation, CartStation, Entrance, Exit
+        map[15][8] = new ProductSearch(new Position(15, 8), floor1, defaultCapacity);
+        map[15][13] = new ProductSearch(new Position(15, 13), floor1, defaultCapacity);
+        map[20][1] = new BasketStation(new Position(20, 1), floor1, defaultCapacity);
+        map[20][20] = new CartStation(new Position(20, 20), floor1, defaultCapacity);
+        map[21][11] = new Entrance(new Position(21, 11), floor1, defaultCapacity);
+        map[21][10] = new Exit(new Position(21, 10), floor1, defaultCapacity);
 
-        // BasketStation & CartStation
-        map[20][1] = new BasketStation(new Position(20, 1));
-        map[20][20] = new CartStation(new Position(20, 20));
-
-        // Entrance & Exit
-        map[21][11] = new Entrance(new Position(21, 11));
-        map[21][10] = new Exit(new Position(21, 10));
-
-        // CheckoutCounters
+        // 7️⃣ Assign CheckoutCounters
         int[] checkoutCols = {2, 4, 6, 8, 13, 15, 17, 19};
-        for (int col : checkoutCols) map[18][col] = new CheckoutCounter(new Position(18, col));
+        for (int col : checkoutCols) map[18][col] = new CheckoutCounter(new Position(18, col), floor1, defaultCapacity);
     }
 
     public Amenity getAmenityAt(int x, int y) {
@@ -113,15 +102,10 @@ public class Floor {
     }
 
     public boolean isPassable(int x, int y) {
-        // Outer edges are walls
-        if (x == 0 || x == 21 || y == 0 || y == 21) {
-            return false;
-        }
+        if (x == 0 || x == 21 || y == 0 || y == 21) return false;
 
         Amenity amenity = getAmenityAt(x, y);
-        if (amenity instanceof Service) {
-            return false;
-        }
+        if (amenity instanceof Service) return false;
 
         return true;
     }
