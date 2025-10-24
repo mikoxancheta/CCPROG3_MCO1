@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * CCPROG3 MCO1 - Supermarket Simulator
  *
