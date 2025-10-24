@@ -1,7 +1,7 @@
-public class Wall extends Amenity {
-    public Wall(Position position) {
-        super(position);
-    }
+public Wall(Position position, Address address) {
+    super(position);
+    this.address = address;
+}
 
     @Override
     public void interact(Shopper shopper) {
