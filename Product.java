@@ -1,9 +1,11 @@
+import java.util.HashSet;
+import java.util.Random;
+
 /**
  * CCPROG3 MCO1 - Supermarket Simulator
  * 
- * This class represents a Product in the supermarket.
- * It serves as the superclass for specific product types (e.g., Alcohol, Beef, Fruit).
- * Each product has a type, name, serial number, and price.
+ * Represents a product sold in the supermarket. Each product has a type, name, 
+ * unique serial number (8 characters: 3 letters for type + 5 digits), and price.
  */
 public class Product {
 
@@ -19,59 +21,76 @@ public class Product {
     /** The price of the product */
     private double price;
 
+    /** Keeps track of generated serial numbers to ensure uniqueness */
+    private static final HashSet<String> usedSerialNumbers = new HashSet<>();
+
     /**
-     * Constructs a new Product with the specified details.
+     * Constructs a new Product with automatic serial number generation.
      * 
-     * @param productType   The type of the product
-     * @param productName   The name of the product
-     * @param serialNumber  The unique serial number of the product
-     * @param price         The price of the product
+     * @param productType The type of the product (used for first 3 letters of serial)
+     * @param productName The name of the product
+     * @param price       The price of the product
      */
-    public Product(
-        String productType,
-        String productName,
-        String serialNumber,
-        double price
-    ) {
+    public Product(String productType, String productName, double price) {
         this.productType = productType;
         this.productName = productName;
-        this.serialNumber = serialNumber;
         this.price = price;
+        this.serialNumber = generateSerialNumber(productType);
     }
 
     /**
-     * Returns the type of the product.
-     * 
+     * Generates a unique 8-character serial number based on the product type.
+     *
+     * @param type The type of the product
+     * @return A unique serial number
+     */
+    private String generateSerialNumber(String type) {
+        Random rand = new Random();
+        String prefix = type.length() >= 3
+                        ? type.substring(0, 3).toUpperCase()
+                        : String.format("%-3s", type).replace(' ', 'X');
+        String serial;
+        do {
+            int number = rand.nextInt(100000); // 0 - 99999
+            serial = String.format("%s%05d", prefix, number);
+        } while (usedSerialNumbers.contains(serial));
+        usedSerialNumbers.add(serial);
+        return serial;
+    }
+
+    /**
+     * Returns the type of this product.
+     *
      * @return The product type
      */
     public String getProductType() {
-        return this.productType;
+        return productType;
     }
 
     /**
-     * Returns the name of the product.
-     * 
+     * Returns the name of this product.
+     *
      * @return The product name
      */
     public String getProductName() {
-        return this.productName;
+        return productName;
     }
 
     /**
-     * Returns the serial number of the product.
-     * 
-     * @return The serial number
+     * Returns the unique serial number of this product.
+     *
+     * @return The product serial number
      */
     public String getSerialNumber() {
-        return this.serialNumber;
+        return serialNumber;
     }
 
     /**
-     * Returns the price of the product.
-     * 
+     * Returns the price of this product.
+     *
      * @return The product price
      */
     public double getPrice() {
-        return this.price;
+        return price;
     }
 }
