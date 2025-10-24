@@ -98,25 +98,35 @@ public class Shopper {
         }
     }
 
-    /**
-     * Picks up a product if the shopper can still carry more (max: 2).
-     * If the shopper has equipment (Basket or Cart), the product is added there.
-     *
-     * @param product The product to be picked up.
-     */
-    public void pickupProduct(Product product) {
-        if (product == null) {
-            System.out.println("Invalid product.");
-            return;
-        }
-
-        if (canCarryAnotherProduct()) {
-            carriedProducts.add(product);
-            System.out.println(name + " picked up " + product.getProductName() + ".");
-        } else {
-            System.out.println(name + " cannot carry more than 2 hand-carried products.");
-        }
+   /**
+ * Picks up a product if the shopper can still carry more (max: 2),
+ * and if age restrictions are satisfied.
+ * 
+ * Shoppers under 18 cannot pick up Alcohol or Cleaning Agent products.
+ *
+ * @param product The product to be picked up.
+ */
+public void pickupProduct(Product product) {
+    if (product == null) {
+        System.out.println("Invalid product.");
+        return;
     }
+
+    // Check for age restrictions
+    String productType = product.getProductType().toLowerCase();
+    if (age < 18 && (productType.equals("alcohol") || productType.equals("cleaning agent"))) {
+        System.out.println(name + " is not allowed to pick up " + product.getProductName() + ".");
+        return;
+    }
+
+    // Check carrying capacity
+    if (canCarryAnotherProduct()) {
+        carriedProducts.add(product);
+        System.out.println(name + " picked up " + product.getProductName() + ".");
+    } else {
+        System.out.println(name + " cannot carry more than 2 hand-carried products.");
+    }
+}
 
     /**
      * Returns a product previously picked up by the shopper.
