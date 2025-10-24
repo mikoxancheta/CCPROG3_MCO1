@@ -95,83 +95,84 @@ public class Driver {
 
     /**
      * Initializes products for all types and stocks them into proper displays
-     * within the supermarket.
+     * within the supermarket. Each product is assigned a unique serial number manually.
      *
      * @param supermarket The supermarket to populate
      */
     private static void initializeProductsAndDisplays(Supermarket supermarket) {
         Product[] fruits = {
-            new Product("Fruit", "Apple", 25.50),
-            new Product("Fruit", "Banana", 15.00),
-            new Product("Fruit", "Mango", 30.00)
+            new Product("Fruit", "Apple", "FRU00001", 25.50),
+            new Product("Fruit", "Banana", "FRU00002", 15.00),
+            new Product("Fruit", "Mango", "FRU00003", 30.00)
         };
 
         Product[] chicken = {
-            new Product("Chicken", "Chicken Breast", 150.00),
-            new Product("Chicken", "Whole Chicken", 220.00),
-            new Product("Chicken", "Chicken Thigh", 170.00)
+            new Product("Chicken", "Chicken Breast", "CHK00001", 150.00),
+            new Product("Chicken", "Whole Chicken", "CHK00002", 220.00),
+            new Product("Chicken", "Chicken Thigh", "CHK00003", 170.00)
         };
 
         Product[] beef = {
-            new Product("Beef", "Ribeye Steak", 350.00),
-            new Product("Beef", "Ground Beef", 280.00),
-            new Product("Beef", "Beef Tapa", 200.00)
+            new Product("Beef", "Ribeye Steak", "BEE00001", 350.00),
+            new Product("Beef", "Ground Beef", "BEE00002", 280.00),
+            new Product("Beef", "Beef Tapa", "BEE00003", 200.00)
         };
 
         Product[] seafood = {
-            new Product("Seafood", "Shrimp", 400.00),
-            new Product("Seafood", "Salmon", 450.00),
-            new Product("Seafood", "Squid", 250.00)
+            new Product("Seafood", "Shrimp", "SEA00001", 400.00),
+            new Product("Seafood", "Salmon", "SEA00002", 450.00),
+            new Product("Seafood", "Squid", "SEA00003", 250.00)
         };
 
         Product[] cereal = {
-            new Product("Cereal", "Java Cereal", 90.00),
-            new Product("Cereal", "OOPsie Oaties", 85.00),
-            new Product("Cereal", "Barley Bytes", 80.00)
+            new Product("Cereal", "Java Cereal", "CER00001", 90.00),
+            new Product("Cereal", "OOPsie Oaties", "CER00002", 85.00),
+            new Product("Cereal", "Barley Bytes", "CER00003", 80.00)
         };
 
         Product[] noodles = {
-            new Product("Noodles", "Instant Ramen", 50.00),
-            new Product("Noodles", "Egg Noodles", 65.00),
-            new Product("Noodles", "Rice Noodles", 60.00)
+            new Product("Noodles", "Instant Ramen", "NOD00001", 50.00),
+            new Product("Noodles", "Egg Noodles", "NOD00002", 65.00),
+            new Product("Noodles", "Rice Noodles", "NOD00003", 60.00)
         };
 
         Product[] snacks = {
-            new Product("Snacks", "Choco Chips", 45.00),
-            new Product("Snacks", "Potato Crisps", 50.00),
-            new Product("Snacks", "Fruit Gummies", 40.00)
+            new Product("Snacks", "Choco Chips", "SNA00001", 45.00),
+            new Product("Snacks", "Potato Crisps", "SNA00002", 50.00),
+            new Product("Snacks", "Fruit Gummies", "SNA00003", 40.00)
         };
 
         Product[] cannedGoods = {
-            new Product("CannedGoods", "Canned Tuna", 55.00),
-            new Product("CannedGoods", "Canned Corn", 50.00),
-            new Product("CannedGoods", "Canned Beans", 60.00)
+            new Product("CannedGoods", "Canned Tuna", "CAN00001", 55.00),
+            new Product("CannedGoods", "Canned Corn", "CAN00002", 50.00),
+            new Product("CannedGoods", "Canned Beans", "CAN00003", 60.00)
         };
 
         Product[] condiments = {
-            new Product("Condiments", "Ketchup", 35.00),
-            new Product("Condiments", "Soy Sauce", 40.00),
-            new Product("Condiments", "Mustard", 30.00)
+            new Product("Condiments", "Ketchup", "CON00001", 35.00),
+            new Product("Condiments", "Soy Sauce", "CON00002", 40.00),
+            new Product("Condiments", "Mustard", "CON00003", 30.00)
         };
 
         Product[] softdrinks = {
-            new Product("Softdrink", "Cola", 45.00),
-            new Product("Softdrink", "Lemonade", 40.00),
-            new Product("Softdrink", "Orange Soda", 42.00)
+            new Product("Softdrink", "Cola", "SFD00001", 45.00),
+            new Product("Softdrink", "Lemonade", "SFD00002", 40.00),
+            new Product("Softdrink", "Orange Soda", "SFD00003", 42.00)
         };
 
         Product[] juice = {
-            new Product("Juice", "Apple Juice", 50.00),
-            new Product("Juice", "Mango Juice", 55.00),
-            new Product("Juice", "Orange Juice", 48.00)
+            new Product("Juice", "Apple Juice", "JUI00001", 50.00),
+            new Product("Juice", "Mango Juice", "JUI00002", 55.00),
+            new Product("Juice", "Orange Juice", "JUI00003", 48.00)
         };
 
         Product[] alcohol = {
-            new Product("Alcohol", "Beer", 120.00),
-            new Product("Alcohol", "Whiskey", 450.00),
-            new Product("Alcohol", "Vodka", 400.00)
+            new Product("Alcohol", "Beer", "ALC00001", 120.00),
+            new Product("Alcohol", "Whiskey", "ALC00002", 450.00),
+            new Product("Alcohol", "Vodka", "ALC00003", 400.00)
         };
 
+        // Create displays with allowed product types
         Display fruitDisplay = new Display(new Position(1, 1), new Address("A1"), 10, "Fruit");
         Display chickenDisplay = new Display(new Position(2, 1), new Address("A2"), 10, "Chicken");
         Display beefDisplay = new Display(new Position(3, 1), new Address("A3"), 10, "Beef");
@@ -185,6 +186,7 @@ public class Driver {
         Display juiceDisplay = new Display(new Position(11, 1), new Address("C3"), 10, "Juice");
         Display alcoholDisplay = new Display(new Position(12, 1), new Address("C4"), 10, "Alcohol");
 
+        // Assign products randomly to displays
         assignProductsRandomly(fruitDisplay, fruits);
         assignProductsRandomly(chickenDisplay, chicken);
         assignProductsRandomly(beefDisplay, beef);
@@ -198,6 +200,7 @@ public class Driver {
         assignProductsRandomly(juiceDisplay, juice);
         assignProductsRandomly(alcoholDisplay, alcohol);
 
+        // Add displays to supermarket
         supermarket.addDisplay(fruitDisplay);
         supermarket.addDisplay(chickenDisplay);
         supermarket.addDisplay(beefDisplay);
