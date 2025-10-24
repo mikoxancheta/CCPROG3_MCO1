@@ -27,4 +27,14 @@ public class Amenity {
     public Position getPosition() {
         return position;
     }
+
+    /**
+     * Determines if the amenity is passable by a shopper.
+     * By default, amenities are passable unless overridden by subclasses.
+     *
+     * @return true if the amenity can be passed through, false otherwise
+     */
+    public boolean isPassable() {
+        return true; // default behavior: passable
+    }
 }
