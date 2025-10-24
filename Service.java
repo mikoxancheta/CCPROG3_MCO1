@@ -1,67 +1,80 @@
 /**
  * CCPROG3 MCO1 - Supermarket Simulator
  *
- * The Service class represents a service area in the supermarket where specific
- * actions or interactions occur, such as entrances, exits, checkout counters, or
- * stations for baskets and carts. Each service has a type that defines its purpose.
- *
- * This class extends Amenity and acts as a base for more specific service types.
+ * Abstract base class for all services in the supermarket, including
+ * checkout counters, basket/cart stations, entrances, exits, and product search.
  */
-public class Service extends Amenity {
+public abstract class Service extends Amenity {
 
-    /** The type of service (e.g., "Entrance", "Exit", "Checkout"). */
-    private String type;
+    /** Position of the service on the floor */
+    protected Position position;
+
+    /** Name of the service */
+    protected String name;
+
+    /** Optional address of the service */
+    protected Address address;
+
+    /** Optional capacity (e.g., number of baskets/carts, or max checkout lines) */
+    protected int capacity;
 
     /**
-     * Constructs a Service with a specified position and type.
+     * Constructor for services with position and name (for stations like Basket/Cart/Entrance/Exit)
      *
-     * @param position the position of the service on the floor
-     * @param type the kind of service represented
+     * @param position Position of the service on the floor
+     * @param name     Name of the service
      */
-    public Service(Position position) {
+    public Service(Position position, String name) {
         super(position);
+        this.position = position;
+        this.name = name;
     }
 
     /**
-     * Returns the type of this service.
+     * Constructor for services with position, address, capacity, and name
+     * (used for CheckoutCounter).
      *
-     * @return the type of service
+     * @param position Position of the service
+     * @param address  Address/location info of the service
+     * @param capacity Maximum number of items or users the service can handle
+     * @param name     Name of the service
      */
-    public String getType() {
-        return type;
+    public Service(Position position, Address address, int capacity, String name) {
+        super(position);
+        this.position = position;
+        this.address = address;
+        this.capacity = capacity;
+        this.name = name;
     }
 
     /**
-     * Performs a service for the shopper.
-     * This will be implemented differently in subclasses
-     * such as Entrance, Exit, and CheckoutCounter.
+     * Abstract method for performing the service for a shopper.
      *
-     * @param shopper the shopper receiving the service
+     * @param shopper The shopper using the service
      */
-    public void performService(Shopper shopper) {
-        // Implementation will depend on subclass type
-    }
+    public abstract void performService(Shopper shopper);
 
-    @Override
+    /**
+     * Default interaction triggers the service.
+     *
+     * @param shopper The shopper interacting with this service
+     */
     public void interact(Shopper shopper) {
-        System.out.println("Welcome to the service: " + this.getClass().getSimpleName());
+        performService(shopper);
+    }
 
-        // Example logic for CheckoutCounter
-        if (shopper.getCart().isEmpty()) {
-            System.out.println("Your cart is empty. Add some products before checking out!");
-            return;
-        }
+    /** @return The name of the service */
+    public String getName() {
+        return name;
+    }
 
-        double total = 0;
-        System.out.println("\n--- Receipt ---");
-        for (Product p : shopper.getCart()) {
-            System.out.println(p.getProductName() + " (" + p.getSerialNumber() + "): ₱" + p.getPrice());
-            total += p.getPrice();
-        }
-        System.out.println("Total: ₱" + total);
-        System.out.println("Thank you for shopping! Your cart is now empty.\n");
+    /** @return The address of the service */
+    public Address getAddress() {
+        return address;
+    }
 
-        // Clear shopper's cart
-        shopper.getCart().clear();
+    /** @return The capacity of the service */
+    public int getCapacity() {
+        return capacity;
     }
 }
