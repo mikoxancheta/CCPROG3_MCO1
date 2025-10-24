@@ -7,6 +7,11 @@
  * delegating actions to the shopper.
  */
 public class Supermarket {
+    private ArrayList<Display> displays = new ArrayList<>();
+
+    public void addDisplay(Display display) {
+        displays.add(display);
+    }
 
     /** The list of floors in the supermarket. */
     private Floor[] floors;
@@ -21,6 +26,10 @@ public class Supermarket {
         floors = new Floor[1];
         floors[0] = new Floor();
         shopper = null;
+    }
+
+    public ArrayList<Display> getDisplays() {
+        return displays;
     }
 
     /**
