@@ -5,10 +5,10 @@
  * This includes both displays and services that are placed at specific positions
  * on the supermarket floor. It serves as the base class for Display and Service.
  */
-public class Amenity {
+public abstract class Amenity {
 
     /** The position of this amenity on the supermarket floor. */
-    private Position position;
+    protected Position position;
 
     /**
      * Constructs an Amenity with a specified position.
@@ -17,6 +17,12 @@ public class Amenity {
      */
     public Amenity(Position position) {
         this.position = position;
+    }
+
+    public abstract void interact(Shopper shopper);
+
+    public Position getPosition() {
+        return position;
     }
 
     /**
